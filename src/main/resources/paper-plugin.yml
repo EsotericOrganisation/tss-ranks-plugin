@@ -1,0 +1,13 @@
+name: TSS-Ranks
+version: '0.1'
+main: net.slqmy.tss_ranks.TSSRanksPlugin
+api-version: '1.20'
+prefix: TSS-Ranks
+dependencies:
+  server:
+    TSS-Core:
+      required: true
+      load: BEFORE
+
+author: slqmy
+description: The plugin that manages ranks and permissions on The Slimy Swamp.

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Slime King",
+    "displayName": "<green>Slime King",
+    "permissions": [
+      {
+        "permissionNode": "cool.permission",
+        "enabled": true
+      },
+      {
+        "permissionNode": "uncool.permission",
+        "enabled": false
+      }
+    ],
+    "fireworkType": "SLIME_KING"
+  },
+  {
+    "name": "Member",
+    "displayName": "<white>Member",
+    "permissions": [
+      {
+        "permissionNode": "cool.permission",
+        "enabled": true
+      },
+      {
+        "permissionNode": "uncool.permission",
+        "enabled": false
+      }
+    ],
+    "fireworkType": "GOLD"
+  }
+]
