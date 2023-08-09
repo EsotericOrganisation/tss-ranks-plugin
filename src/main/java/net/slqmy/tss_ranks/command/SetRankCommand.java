@@ -21,11 +21,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.UUID;
 
-public class RankCommand {
+public class SetRankCommand {
 
 	private final RankManager rankManager;
 
-	public RankCommand(@NotNull TSSRanksPlugin plugin) {
+	public SetRankCommand(@NotNull TSSRanksPlugin plugin) {
 		this.rankManager = plugin.getRankManager();
 
 		DebugUtil.log((Object) rankManager.getRanks());

@@ -2,7 +2,7 @@ package net.slqmy.tss_ranks;
 
 import net.slqmy.tss_core.TSSCorePlugin;
 import net.slqmy.tss_core.util.FileUtil;
-import net.slqmy.tss_ranks.command.RankCommand;
+import net.slqmy.tss_ranks.command.SetRankCommand;
 import net.slqmy.tss_ranks.event.listener.ChatListener;
 import net.slqmy.tss_ranks.event.listener.ConnectionListener;
 import net.slqmy.tss_ranks.manager.NameTagManager;
@@ -51,7 +51,7 @@ public final class TSSRanksPlugin extends JavaPlugin {
 		rankManager = new RankManager(this);
 		nameTagManager = new NameTagManager(this);
 
-		new RankCommand(this);
+		new SetRankCommand(this);
 
 		PluginManager pluginManager = Bukkit.getPluginManager();
 
