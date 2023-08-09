@@ -76,7 +76,13 @@ public final class RankManager {
 	}
 
 	public Rank getPlayerRank(UUID uuid) {
-		return getRank(plugin.getCore().getPlayerManager().getProfile(uuid).getRankName());
+		Rank rank = getRank(plugin.getCore().getPlayerManager().getProfile(uuid).getRankName());
+
+		if (rank == null) {
+			return defaultRank;
+		}
+
+		return rank;
 	}
 
 	public Rank getPlayerRank(@NotNull Player player) {
@@ -106,9 +112,7 @@ public final class RankManager {
 			playerPermissionsMap.put(uuid, attachment);
 		}
 
-		for (Permission permission : plugin.getRankManager().getPlayerRank(uuid).getPermissions()) {
-			attachment.unsetPermission(permission.getPermissionNode());
-		}
+		attachment.getPermissions().clear();
 
 		for (Permission permission : getPlayerRank(player).getPermissions()) {
 			attachment.setPermission(permission.getPermissionNode(), permission.isEnabled());
