@@ -2,6 +2,7 @@ package net.slqmy.tss_ranks.manager;
 
 import net.slqmy.tss_core.data.type.Permission;
 import net.slqmy.tss_core.data.type.Rank;
+import net.slqmy.tss_core.data.type.player.PlayerProfile;
 import net.slqmy.tss_core.util.FileUtil;
 import net.slqmy.tss_ranks.TSSRanksPlugin;
 import org.bukkit.Bukkit;
@@ -75,14 +76,18 @@ public final class RankManager {
 		setRank(uuid, getRank(rankName), false);
 	}
 
-	public Rank getPlayerRank(UUID uuid) {
-		Rank rank = getRank(plugin.getCore().getPlayerManager().getProfile(uuid).getRankName());
+	public Rank getPlayerRank(@NotNull PlayerProfile playerProfile) {
+		Rank rank = getRank(playerProfile.getRankName());
 
 		if (rank == null) {
 			return defaultRank;
 		}
 
 		return rank;
+	}
+
+	public Rank getPlayerRank(UUID uuid) {
+		return getPlayerRank(plugin.getCore().getPlayerManager().getProfile(uuid));
 	}
 
 	public Rank getPlayerRank(@NotNull Player player) {
