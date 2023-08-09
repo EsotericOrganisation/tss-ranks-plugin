@@ -36,22 +36,28 @@ public class SetRankCommand {
 										ArgumentSuggestions.strings(Arrays.stream(rankManager.getRanks()).map(Rank::getName).toArray(String[]::new))
 						))
 						.executesPlayer((executionInfo) -> {
-											Player player = executionInfo.sender();
-											CommandArguments args = executionInfo.args();
+							Player player = executionInfo.sender();
+							CommandArguments args = executionInfo.args();
 
-											OfflinePlayer target = (OfflinePlayer) args.get("player");
+							OfflinePlayer target = (OfflinePlayer) args.get("player");
+							assert target != null;
 
-											String rankName = (String) args.get("rank");
-											Rank rank = rankManager.getRank(rankName);
+							MessageManager messageManager = plugin.getCore().getMessageManager();
 
-											MessageManager messageManager = plugin.getCore().getMessageManager();
+							if (target.getName() == null) {
+								player.sendMessage(messageManager.getPlayerMessage(Message.NONEXISTENT_PLAYER, player));
+								return;
+							}
 
-											if (rank == null) {
-												player.sendMessage(messageManager.getPlayerMessage(Message.NONEXISTENT_RANK, player));
-												return;
-											}
+							String rankName = (String) args.get("rank");
+							Rank rank = rankManager.getRank(rankName);
 
-											assert target != null;
+							if (rank == null) {
+								player.sendMessage(messageManager.getPlayerMessage(Message.NONEXISTENT_RANK, player));
+								return;
+							}
+
+							assert target != null;
 											UUID targetUuid = target.getUniqueId();
 											Rank previousRank = rankManager.getPlayerRank(targetUuid);
 											String previousRankName = previousRank.getName();
