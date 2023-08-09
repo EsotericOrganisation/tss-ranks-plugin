@@ -3,6 +3,8 @@ package net.slqmy.tss_ranks.event.listener;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.slqmy.tss_core.data.type.Rank;
+import net.slqmy.tss_core.type.Colour;
 import net.slqmy.tss_ranks.TSSRanksPlugin;
 import net.slqmy.tss_ranks.manager.RankManager;
 import org.bukkit.Bukkit;
@@ -21,14 +23,16 @@ public final class ChatListener implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onChat(final @NotNull AsyncChatEvent event) {
+	public void onChat(@NotNull AsyncChatEvent event) {
 		event.setCancelled(true);
 
-		final Player player = event.getPlayer();
-		final TextComponent rankDisplayName = rankManager.getPlayerRank(player).getDisplayName();
+		Player player = event.getPlayer();
+		Rank playerRank = rankManager.getPlayerRank(player);
+		TextComponent prefix = playerRank.getNamePrefix();
+		TextComponent suffix = playerRank.getNameSuffix();
 
 		Bukkit.broadcast(
-						rankDisplayName.append(Component.space()).append(Component.text(player.getName())).append(Component.text(" » ")).append(event.message())
+						prefix.append(Component.text(player.getName(), Colour.WHITE)).append(suffix).append(Component.text(" » ", Colour.WHITE)).append(event.message().color(Colour.WHITE))
 		);
 	}
 }

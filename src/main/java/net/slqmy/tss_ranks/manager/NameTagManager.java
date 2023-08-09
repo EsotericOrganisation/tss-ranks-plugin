@@ -1,6 +1,7 @@
 package net.slqmy.tss_ranks.manager;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import net.slqmy.tss_core.data.type.Rank;
 import net.slqmy.tss_ranks.TSSRanksPlugin;
 import org.bukkit.Bukkit;
@@ -24,11 +25,14 @@ public final class NameTagManager {
 		player.setScoreboard(scoreboard);
 
 		RankManager rankManager = plugin.getRankManager();
-		Rank[] ranks = rankManager.getRanks();
-
-		for (Rank rank : ranks) {
+		for (Rank rank : rankManager.getRanks()) {
 			Team team = scoreboard.registerNewTeam(rank.getName());
-			team.prefix(rank.getDisplayName().append(Component.space()));
+
+			TextComponent rankDisplayName = rank.getDisplayName();
+			if (!rankDisplayName.equals(Component.empty())) {
+				team.prefix(rank.getNamePrefix());
+				team.suffix(rank.getNameSuffix());
+			}
 		}
 
 		UUID playerUUID = player.getUniqueId();
@@ -49,7 +53,8 @@ public final class NameTagManager {
 	}
 
 	public void addNewNameTag(@NotNull Player player) {
-		Rank playerRank = plugin.getRankManager().getPlayerRank(player.getUniqueId());
+		RankManager rankManager = plugin.getRankManager();
+		Rank playerRank = rankManager.getPlayerRank(player);
 
 		String rankName = playerRank.getName();
 		String playerName = player.getName();
