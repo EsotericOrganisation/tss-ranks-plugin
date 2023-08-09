@@ -65,14 +65,14 @@ public class SetRankCommand {
 												if (areSameRank) {
 													player.sendMessage(messageManager.getPlayerMessage(Message.RANK_ALREADY_SET, player, rankDisplayName));
 												} else {
-													rankManager.setRank(targetUuid, rankName, false);
+													rankManager.setRank(targetUuid, rankName);
 													player.sendMessage(messageManager.getPlayerMessage(Message.RANK_SUCCESSFULLY_SET, player, rankDisplayName));
 												}
 											} else {
 												if (areSameRank) {
 													player.sendMessage(messageManager.getPlayerMessage(Message.RANK_ALREADY_SET_OTHER, player, Component.text(target.getName()), rankDisplayName));
 												} else {
-													rankManager.setRank(targetUuid, rankName, false);
+													rankManager.setRank(targetUuid, rankName);
 
 													player.sendMessage(messageManager.getPlayerMessage(Message.RANK_SUCCESSFULLY_SET_OTHER, player, Component.text(target.getName()), rankDisplayName));
 

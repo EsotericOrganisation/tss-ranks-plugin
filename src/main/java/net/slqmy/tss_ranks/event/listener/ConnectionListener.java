@@ -28,7 +28,9 @@ public class ConnectionListener implements Listener {
 		RankManager rankManager = plugin.getRankManager();
 
 		if (!event.getPlayer().hasPlayedBefore()) {
-			rankManager.setRank(playerUuid, plugin.getConfig().getString("default-rank"), true);
+			rankManager.setRank(playerUuid, rankManager.getDefaultRank(), true);
+		} else {
+			rankManager.setRank(playerUuid, plugin.getCore().getPlayerManager().getProfile(playerUuid).getRankName());
 		}
 
 		NameTagManager nameTagManager = plugin.getNameTagManager();

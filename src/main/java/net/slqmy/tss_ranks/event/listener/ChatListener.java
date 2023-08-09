@@ -1,11 +1,11 @@
 package net.slqmy.tss_ranks.event.listener;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.slqmy.tss_ranks.TSSRanksPlugin;
 import net.slqmy.tss_ranks.manager.RankManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -27,9 +27,8 @@ public final class ChatListener implements Listener {
 		final Player player = event.getPlayer();
 		final TextComponent rankDisplayName = rankManager.getPlayerRank(player).getDisplayName();
 
-		Bukkit.broadcastMessage(
-						rankDisplayName + " "
-										+ player.getName()
-										+ " » " + ChatColor.GRAY + event.message());
+		Bukkit.broadcast(
+						rankDisplayName.append(Component.space()).append(Component.text(player.getName())).append(Component.text(" » ")).append(event.message())
+		);
 	}
 }

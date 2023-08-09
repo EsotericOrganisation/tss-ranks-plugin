@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -16,19 +17,33 @@ public final class RankManager {
 
 	private final TSSRanksPlugin plugin;
 
+	private final Rank[] ranks;
+	private final Rank defaultRank;
 	private final HashMap<UUID, PermissionAttachment> playerPermissionsMap = new HashMap<>();
 
 	public RankManager(@NotNull TSSRanksPlugin plugin) {
+
 		this.plugin = plugin;
+		this.ranks = FileUtil.readJsonFile(plugin.getRanksFile(), Rank[].class);
+		this.defaultRank = getRank(plugin.getConfig().getString("default-rank-name"));
+	}
+
+	public Rank[] getRanks() {
+		return ranks;
+	}
+
+	public Rank getDefaultRank() {
+		return defaultRank;
 	}
 
 	public HashMap<UUID, PermissionAttachment> getPlayerPermissionsMap() {
 		return playerPermissionsMap;
 	}
 
-	public void setRank(UUID uuid, String rankName, boolean isFirstJoin) {
-		Rank targetRank = getRank(rankName);
-		assert targetRank != null;
+	public void setRank(UUID uuid, Rank targetRank, boolean isFirstJoin) {
+		if (targetRank == null) {
+			return;
+		}
 
 		String targetRankName = targetRank.getName();
 		plugin.getCore().getPlayerManager().getProfile(uuid).setRankName(targetRankName);
@@ -48,6 +63,18 @@ public final class RankManager {
 		}
 	}
 
+	public void setRank(UUID uuid, Rank targetRank) {
+		setRank(uuid, targetRank, false);
+	}
+
+	public void setRank(UUID uuid, String rankName, boolean isFirstJoin) {
+		setRank(uuid, getRank(rankName), isFirstJoin);
+	}
+
+	public void setRank(UUID uuid, String rankName) {
+		setRank(uuid, getRank(rankName), false);
+	}
+
 	public Rank getPlayerRank(UUID uuid) {
 		return getRank(plugin.getCore().getPlayerManager().getProfile(uuid).getRankName());
 	}
@@ -56,8 +83,8 @@ public final class RankManager {
 		return getPlayerRank(player.getUniqueId());
 	}
 
-	public Rank getRank(String rankName) {
-		for (Rank rank : getRanks()) {
+	public @Nullable Rank getRank(String rankName) {
+		for (Rank rank : ranks) {
 			String targetRankName = rank.getName();
 
 			if (targetRankName.equals(rankName)) {
@@ -65,15 +92,7 @@ public final class RankManager {
 			}
 		}
 
-		return getDefaultRank();
-	}
-
-	public Rank getDefaultRank() {
-		return getRank(plugin.getConfig().getString("default-rank-name"));
-	}
-
-	public Rank[] getRanks() {
-		return FileUtil.readJsonFile(plugin.getRanksFile(), Rank[].class);
+		return null;
 	}
 
 	public void setPermissions(@NotNull Player player) {
