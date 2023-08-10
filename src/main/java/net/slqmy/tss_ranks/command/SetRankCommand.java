@@ -6,7 +6,6 @@ import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.GreedyStringArgument;
 import dev.jorel.commandapi.arguments.OfflinePlayerArgument;
 import dev.jorel.commandapi.executors.CommandArguments;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.slqmy.tss_core.data.Message;
 import net.slqmy.tss_core.data.type.Rank;
@@ -57,33 +56,32 @@ public class SetRankCommand {
 								return;
 							}
 
-							assert target != null;
-											UUID targetUuid = target.getUniqueId();
-											Rank previousRank = rankManager.getPlayerRank(targetUuid);
-											String previousRankName = previousRank.getName();
+							UUID targetUuid = target.getUniqueId();
+							Rank previousRank = rankManager.getPlayerRank(targetUuid);
+							String previousRankName = previousRank.getName();
 
-											String correctRankName = rank.getName();
-											boolean areSameRank = previousRankName.equals(correctRankName);
+							String correctRankName = rank.getName();
+							boolean areSameRank = previousRankName.equals(correctRankName);
 
-											TextComponent rankDisplayName = rank.getDisplayName();
+							TextComponent rankDisplayName = rank.getDisplayName();
 
 											if (player.getUniqueId() == targetUuid) {
 												if (areSameRank) {
-													player.sendMessage(messageManager.getPlayerMessage(Message.RANK_ALREADY_SET, player, rankDisplayName));
+													messageManager.sendMessage(player, Message.RANK_ALREADY_SET, rankDisplayName);
 												} else {
 													rankManager.setRank(targetUuid, rankName);
-													player.sendMessage(messageManager.getPlayerMessage(Message.RANK_SUCCESSFULLY_SET, player, rankDisplayName));
+													messageManager.sendMessage(player, Message.RANK_SUCCESSFULLY_SET, rankDisplayName);
 												}
 											} else {
 												if (areSameRank) {
-													player.sendMessage(messageManager.getPlayerMessage(Message.RANK_ALREADY_SET_OTHER, player, Component.text(target.getName()), rankDisplayName));
+													messageManager.sendMessage(player, Message.RANK_ALREADY_SET_OTHER, target.getName(), rankDisplayName);
 												} else {
 													rankManager.setRank(targetUuid, rankName);
 
-													player.sendMessage(messageManager.getPlayerMessage(Message.RANK_SUCCESSFULLY_SET_OTHER, player, Component.text(target.getName()), rankDisplayName));
+													messageManager.sendMessage(player, Message.RANK_SUCCESSFULLY_SET_OTHER, target.getName(), rankDisplayName);
 
 													if (target.isOnline()) {
-														((Player) target).sendMessage(messageManager.getPlayerMessage(Message.RANK_SET_NOTIFICATION, player, rankDisplayName));
+														messageManager.sendMessage(player, Message.RANK_SET_NOTIFICATION, rankDisplayName);
 													}
 												}
 											}
