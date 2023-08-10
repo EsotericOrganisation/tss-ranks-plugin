@@ -27,11 +27,12 @@ public class ConnectionListener implements Listener {
 		UUID playerUuid = player.getUniqueId();
 
 		RankManager rankManager = plugin.getRankManager();
+		String rankName = plugin.getCore().getPlayerManager().getProfile(playerUuid).getRankName();
 
-		if (!event.getPlayer().hasPlayedBefore()) {
+		if (!event.getPlayer().hasPlayedBefore() || rankName == null) {
 			rankManager.setRank(playerUuid, rankManager.getDefaultRank(), true);
 		} else {
-			rankManager.setRank(playerUuid, plugin.getCore().getPlayerManager().getProfile(playerUuid).getRankName());
+			rankManager.setRank(playerUuid, rankName);
 		}
 
 		NameTagManager nameTagManager = plugin.getNameTagManager();
