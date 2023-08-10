@@ -2,7 +2,7 @@ package net.slqmy.tss_ranks.manager;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
-import net.slqmy.tss_core.data.type.Rank;
+import net.slqmy.tss_core.datatype.Rank;
 import net.slqmy.tss_ranks.TSSRanksPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
