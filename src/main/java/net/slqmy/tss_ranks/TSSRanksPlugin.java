@@ -1,7 +1,7 @@
 package net.slqmy.tss_ranks;
 
 import net.slqmy.tss_core.TSSCorePlugin;
-import net.slqmy.tss_core.util.FileUtil;
+import net.slqmy.tss_core.manager.FileManager;
 import net.slqmy.tss_ranks.command.SetRankCommand;
 import net.slqmy.tss_ranks.event.listener.ChatListener;
 import net.slqmy.tss_ranks.event.listener.ConnectionListener;
@@ -18,6 +18,7 @@ public final class TSSRanksPlugin extends JavaPlugin {
 
 	private final TSSCorePlugin core = (TSSCorePlugin) Bukkit.getPluginManager().getPlugin("TSS-Core");
 
+	private FileManager fileManager;
 	private RankManager rankManager;
 	private NameTagManager nameTagManager;
 
@@ -25,6 +26,10 @@ public final class TSSRanksPlugin extends JavaPlugin {
 
 	public TSSCorePlugin getCore() {
 		return core;
+	}
+
+	public FileManager getFileManager() {
+		return fileManager;
 	}
 
 	public RankManager getRankManager() {
@@ -46,7 +51,8 @@ public final class TSSRanksPlugin extends JavaPlugin {
 		getConfig().options().copyDefaults();
 		saveDefaultConfig();
 
-		ranksFile = FileUtil.initiateJsonFile("ranks", this);
+		fileManager = new FileManager(this);
+		ranksFile = fileManager.initiateJsonFile("ranks");
 
 		rankManager = new RankManager(this);
 		nameTagManager = new NameTagManager(this);

@@ -3,7 +3,6 @@ package net.slqmy.tss_ranks.manager;
 import net.slqmy.tss_core.data.type.Permission;
 import net.slqmy.tss_core.data.type.Rank;
 import net.slqmy.tss_core.data.type.player.PlayerProfile;
-import net.slqmy.tss_core.util.FileUtil;
 import net.slqmy.tss_ranks.TSSRanksPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,7 +24,7 @@ public final class RankManager {
 	public RankManager(@NotNull TSSRanksPlugin plugin) {
 
 		this.plugin = plugin;
-		this.ranks = FileUtil.readJsonFile(plugin.getRanksFile(), Rank[].class);
+		this.ranks = plugin.getFileManager().readJsonFile(plugin.getRanksFile(), Rank[].class);
 		this.defaultRank = getRank(plugin.getConfig().getString("default-rank-name"));
 	}
 
