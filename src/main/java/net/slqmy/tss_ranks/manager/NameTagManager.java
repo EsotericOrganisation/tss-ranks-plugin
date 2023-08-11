@@ -14,69 +14,69 @@ import java.util.UUID;
 
 public final class NameTagManager {
 
-	private final TSSRanksPlugin plugin;
+  private final TSSRanksPlugin plugin;
 
-	public NameTagManager(TSSRanksPlugin plugin) {
-		this.plugin = plugin;
+  public NameTagManager(TSSRanksPlugin plugin) {
+	this.plugin = plugin;
+  }
+
+  public void setNameTags(@NotNull Player player) {
+	Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+	player.setScoreboard(scoreboard);
+
+	RankManager rankManager = plugin.getRankManager();
+	for (Rank rank : rankManager.getRanks()) {
+	  Team team = scoreboard.registerNewTeam(rank.getName());
+
+	  TextComponent rankDisplayName = rank.getDisplayName();
+	  if (!rankDisplayName.equals(Component.empty())) {
+		team.prefix(rank.getNamePrefix());
+		team.suffix(rank.getNameSuffix());
+	  }
 	}
 
-	public void setNameTags(@NotNull Player player) {
-		Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-		player.setScoreboard(scoreboard);
+	UUID playerUUID = player.getUniqueId();
 
-		RankManager rankManager = plugin.getRankManager();
-		for (Rank rank : rankManager.getRanks()) {
-			Team team = scoreboard.registerNewTeam(rank.getName());
+	for (Player target : Bukkit.getOnlinePlayers()) {
+	  UUID targetUUID = target.getUniqueId();
 
-			TextComponent rankDisplayName = rank.getDisplayName();
-			if (!rankDisplayName.equals(Component.empty())) {
-				team.prefix(rank.getNamePrefix());
-				team.suffix(rank.getNameSuffix());
-			}
+	  if (!targetUUID.equals(playerUUID)) {
+		Rank targetRank = rankManager.getPlayerRank(targetUUID);
+
+		Team targetRankTeam = scoreboard.getTeam(targetRank.getName());
+
+		if (targetRankTeam != null) {
+		  targetRankTeam.addEntry(target.getName());
 		}
-
-		UUID playerUUID = player.getUniqueId();
-
-		for (Player target : Bukkit.getOnlinePlayers()) {
-			UUID targetUUID = target.getUniqueId();
-
-			if (!targetUUID.equals(playerUUID)) {
-				Rank targetRank = rankManager.getPlayerRank(targetUUID);
-
-				Team targetRankTeam = scoreboard.getTeam(targetRank.getName());
-
-				if (targetRankTeam != null) {
-					targetRankTeam.addEntry(target.getName());
-				}
-			}
-		}
+	  }
 	}
+  }
 
-	public void addNewNameTag(@NotNull Player player) {
-		RankManager rankManager = plugin.getRankManager();
-		Rank playerRank = rankManager.getPlayerRank(player);
+  public void addNewNameTag(@NotNull Player player) {
+	RankManager rankManager = plugin.getRankManager();
+	Rank playerRank = rankManager.getPlayerRank(player);
 
-		String rankName = playerRank.getName();
-		String playerName = player.getName();
+	String rankName = playerRank.getName();
+	String playerName = player.getName();
 
-		for (Player target : Bukkit.getOnlinePlayers()) {
-			Team targetRankTeam = target.getScoreboard().getTeam(rankName);
+	for (Player target : Bukkit.getOnlinePlayers()) {
+	  Team targetRankTeam = target.getScoreboard().getTeam(rankName);
 
-			if (targetRankTeam != null) {
-				targetRankTeam.addEntry(playerName);
-			}
-		}
+	  if (targetRankTeam != null) {
+		targetRankTeam.addEntry(playerName);
+	  }
 	}
+  }
 
-	public void removeNameTag(@NotNull Player player) {
-		String playerName = player.getName();
+  public void removeNameTag(@NotNull Player player) {
+	String playerName = player.getName();
 
-		for (Player target : Bukkit.getOnlinePlayers()) {
-			Team playerTeam = target.getScoreboard().getEntryTeam(playerName);
+	for (Player target : Bukkit.getOnlinePlayers()) {
+	  Team playerTeam = target.getScoreboard().getEntryTeam(playerName);
 
-			if (playerTeam != null) {
-				playerTeam.removeEntry(playerName);
-			}
-		}
+	  if (playerTeam != null) {
+		playerTeam.removeEntry(playerName);
+	  }
 	}
+  }
 }
