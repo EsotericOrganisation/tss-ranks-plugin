@@ -44,11 +44,11 @@ public class ConnectionListener implements Listener {
 	}
 
 	@EventHandler
-	public void onQuit(@NotNull PlayerQuitEvent event) {
-		Player player = event.getPlayer();
-		UUID playerUUID = player.getUniqueId();
+	public void onDisconnect(@NotNull PlayerQuitEvent event) {
+	  Player player = event.getPlayer();
+	  UUID playerUUID = player.getUniqueId();
 
-		plugin.getNameTagManager().removeNameTag(player);
-		plugin.getRankManager().getPlayerPermissionsMap().remove(playerUUID);
+	  plugin.getNameTagManager().removeNameTag(player);
+	  plugin.getRankManager().getPlayerPermissionsMap().remove(playerUUID);
 	}
 }
