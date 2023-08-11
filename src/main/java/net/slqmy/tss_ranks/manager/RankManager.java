@@ -15,111 +15,111 @@ import java.util.UUID;
 
 public final class RankManager {
 
-	private final TSSRanksPlugin plugin;
+  private final TSSRanksPlugin plugin;
 
-	private final Rank[] ranks;
-	private final Rank defaultRank;
-	private final HashMap<UUID, PermissionAttachment> playerPermissionsMap = new HashMap<>();
+  private final Rank[] ranks;
+  private final Rank defaultRank;
+  private final HashMap<UUID, PermissionAttachment> playerPermissionsMap = new HashMap<>();
 
-	public RankManager(@NotNull TSSRanksPlugin plugin) {
+  public RankManager(@NotNull TSSRanksPlugin plugin) {
 
-		this.plugin = plugin;
-		this.ranks = plugin.getFileManager().readJsonFile(plugin.getRanksFile(), Rank[].class);
-		this.defaultRank = getRank(plugin.getConfig().getString("default-rank-name"));
+	this.plugin = plugin;
+	this.ranks = plugin.getFileManager().readJsonFile(plugin.getRanksFile(), Rank[].class);
+	this.defaultRank = getRank(plugin.getConfig().getString("default-rank-name"));
+  }
+
+  public Rank[] getRanks() {
+	return ranks;
+  }
+
+  public Rank getDefaultRank() {
+	return defaultRank;
+  }
+
+  public HashMap<UUID, PermissionAttachment> getPlayerPermissionsMap() {
+	return playerPermissionsMap;
+  }
+
+  public void setRank(UUID uuid, Rank targetRank, boolean isFirstJoin) {
+	if (targetRank == null) {
+	  return;
 	}
 
-	public Rank[] getRanks() {
-		return ranks;
+	String targetRankName = targetRank.getName();
+	plugin.getCore().getPlayerManager().getProfile(uuid).setRankName(targetRankName);
+
+	if (Bukkit.getOfflinePlayer(uuid).isOnline()) {
+	  final Player player = Bukkit.getPlayer(uuid);
+	  assert player != null;
+
+	  final NameTagManager nameTagManager = plugin.getNameTagManager();
+
+	  nameTagManager.removeNameTag(player);
+	  nameTagManager.addNewNameTag(player);
+
+	  if (!isFirstJoin) {
+		setPermissions(player);
+	  }
+	}
+  }
+
+  public void setRank(UUID uuid, Rank targetRank) {
+	setRank(uuid, targetRank, false);
+  }
+
+  public void setRank(UUID uuid, String rankName, boolean isFirstJoin) {
+	setRank(uuid, getRank(rankName), isFirstJoin);
+  }
+
+  public void setRank(UUID uuid, String rankName) {
+	setRank(uuid, getRank(rankName), false);
+  }
+
+  public Rank getPlayerRank(@NotNull PlayerProfile playerProfile) {
+	Rank rank = getRank(playerProfile.getRankName());
+
+	if (rank == null) {
+	  return defaultRank;
 	}
 
-	public Rank getDefaultRank() {
-		return defaultRank;
-	}
+	return rank;
+  }
 
-	public HashMap<UUID, PermissionAttachment> getPlayerPermissionsMap() {
-		return playerPermissionsMap;
-	}
+  public Rank getPlayerRank(UUID uuid) {
+	return getPlayerRank(plugin.getCore().getPlayerManager().getProfile(uuid));
+  }
 
-	public void setRank(UUID uuid, Rank targetRank, boolean isFirstJoin) {
-		if (targetRank == null) {
-			return;
-		}
+  public Rank getPlayerRank(@NotNull Player player) {
+	return getPlayerRank(player.getUniqueId());
+  }
 
-		String targetRankName = targetRank.getName();
-		plugin.getCore().getPlayerManager().getProfile(uuid).setRankName(targetRankName);
+  public @Nullable Rank getRank(String rankName) {
+	for (Rank rank : ranks) {
+	  String targetRankName = rank.getName();
 
-		if (Bukkit.getOfflinePlayer(uuid).isOnline()) {
-			final Player player = Bukkit.getPlayer(uuid);
-			assert player != null;
-
-			final NameTagManager nameTagManager = plugin.getNameTagManager();
-
-			nameTagManager.removeNameTag(player);
-			nameTagManager.addNewNameTag(player);
-
-			if (!isFirstJoin) {
-				setPermissions(player);
-			}
-		}
-	}
-
-	public void setRank(UUID uuid, Rank targetRank) {
-		setRank(uuid, targetRank, false);
-	}
-
-	public void setRank(UUID uuid, String rankName, boolean isFirstJoin) {
-		setRank(uuid, getRank(rankName), isFirstJoin);
-	}
-
-	public void setRank(UUID uuid, String rankName) {
-		setRank(uuid, getRank(rankName), false);
-	}
-
-	public Rank getPlayerRank(@NotNull PlayerProfile playerProfile) {
-		Rank rank = getRank(playerProfile.getRankName());
-
-		if (rank == null) {
-			return defaultRank;
-		}
-
+	  if (targetRankName.equals(rankName)) {
 		return rank;
+	  }
 	}
 
-	public Rank getPlayerRank(UUID uuid) {
-		return getPlayerRank(plugin.getCore().getPlayerManager().getProfile(uuid));
+	return null;
+  }
+
+  public void setPermissions(@NotNull Player player) {
+	UUID uuid = player.getUniqueId();
+	PermissionAttachment attachment;
+
+	if (playerPermissionsMap.containsKey(uuid)) {
+	  attachment = playerPermissionsMap.get(uuid);
+	} else {
+	  attachment = player.addAttachment(plugin);
+	  playerPermissionsMap.put(uuid, attachment);
 	}
 
-	public Rank getPlayerRank(@NotNull Player player) {
-		return getPlayerRank(player.getUniqueId());
+	attachment.getPermissions().clear();
+
+	for (Permission permission : getPlayerRank(player).getPermissions()) {
+	  attachment.setPermission(permission.getPermissionNode(), permission.isEnabled());
 	}
-
-	public @Nullable Rank getRank(String rankName) {
-		for (Rank rank : ranks) {
-			String targetRankName = rank.getName();
-
-			if (targetRankName.equals(rankName)) {
-				return rank;
-			}
-		}
-
-		return null;
-	}
-
-	public void setPermissions(@NotNull Player player) {
-		UUID uuid = player.getUniqueId();
-		PermissionAttachment attachment;
-
-		if (playerPermissionsMap.containsKey(uuid)) {
-			attachment = playerPermissionsMap.get(uuid);
-		} else {
-			attachment = player.addAttachment(plugin);
-			playerPermissionsMap.put(uuid, attachment);
-		}
-
-		attachment.getPermissions().clear();
-
-		for (Permission permission : getPlayerRank(player).getPermissions()) {
-			attachment.setPermission(permission.getPermissionNode(), permission.isEnabled());
-		}
-	}
+  }
 }

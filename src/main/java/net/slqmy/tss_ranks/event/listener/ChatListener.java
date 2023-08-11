@@ -16,23 +16,23 @@ import org.jetbrains.annotations.NotNull;
 
 public final class ChatListener implements Listener {
 
-	private final RankManager rankManager;
+  private final RankManager rankManager;
 
-	public ChatListener(@NotNull TSSRanksPlugin plugin) {
-		this.rankManager = plugin.getRankManager();
-	}
+  public ChatListener(@NotNull TSSRanksPlugin plugin) {
+	this.rankManager = plugin.getRankManager();
+  }
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-	public void onChat(@NotNull AsyncChatEvent event) {
-		event.setCancelled(true);
+  @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+  public void onChat(@NotNull AsyncChatEvent event) {
+	event.setCancelled(true);
 
-		Player player = event.getPlayer();
-		Rank playerRank = rankManager.getPlayerRank(player);
-		TextComponent prefix = playerRank.getNamePrefix();
-		TextComponent suffix = playerRank.getNameSuffix();
+	Player player = event.getPlayer();
+	Rank playerRank = rankManager.getPlayerRank(player);
+	TextComponent prefix = playerRank.getNamePrefix();
+	TextComponent suffix = playerRank.getNameSuffix();
 
-		Bukkit.broadcast(
-						prefix.append(Component.text(player.getName(), Colour.WHITE)).append(suffix).append(Component.text(" » ", Colour.WHITE)).append(event.message().color(Colour.WHITE))
-		);
-	}
+	Bukkit.broadcast(
+			prefix.append(Component.text(player.getName(), Colour.WHITE)).append(suffix).append(Component.text(" » ", Colour.WHITE)).append(event.message().color(Colour.WHITE))
+	);
+  }
 }
