@@ -1,3 +1,5 @@
+import xyz.jpenilla.resourcefactory.bukkit.BukkitPluginYaml
+
 plugins {
     `java-library`
     id("io.papermc.paperweight.userdev") version "1.7.1"
