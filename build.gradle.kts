@@ -1,9 +1,8 @@
 plugins {
-    java
-    application
-
-    id("io.papermc.paperweight.userdev") version "1.5.5"
-    id("xyz.jpenilla.run-paper") version "2.1.0"
+    `java-library`
+    id("io.papermc.paperweight.userdev") version "1.7.1"
+    id("xyz.jpenilla.run-paper") version "2.3.0"
+    id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1"
 }
 
 group = "net.slqmy"
@@ -11,7 +10,7 @@ version = "0.1"
 description = "The plugin that manages ranks and permissions on The Slimy Swamp."
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 repositories {
@@ -21,45 +20,23 @@ repositories {
 dependencies {
     compileOnly(files("../TSS-Core/build/libs/tss_core-0.1-dev-all.jar"))
 
-    paperweight.paperDevBundle("1.20.1-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
 }
 
 tasks {
-    assemble {
-        dependsOn(reobfJar)
-    }
-
     compileJava {
         options.encoding = Charsets.UTF_8.name()
-        options.release.set(17)
+        options.release.set(21)
     }
 
     javadoc {
         options.encoding = Charsets.UTF_8.name()
     }
-
-    processResources {
-        filteringCharset = Charsets.UTF_8.name()
-
-        val props = mapOf(
-                "name" to project.name,
-                "version" to project.version,
-                "description" to project.description,
-                "apiVersion" to "1.20"
-        )
-
-        inputs.properties(props)
-
-        filesMatching("plugin.yml") {
-            expand(props)
-        }
-    }
-
-    runServer {
-        minecraftVersion("1.20.1")
-    }
 }
 
-application {
-    mainClass.set("TSSRanksPlugin")
+bukkitPluginYaml {
+  main = "net.slqmy.tss_ranks.TSSRanksPlugin"
+  load = BukkitPluginYaml.PluginLoadOrder.STARTUP
+  authors.add("Slqmy")
+  apiVersion = "1.21"
 }
