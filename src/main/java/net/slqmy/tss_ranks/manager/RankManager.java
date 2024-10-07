@@ -1,8 +1,8 @@
 package net.slqmy.tss_ranks.manager;
 
-import net.slqmy.tss_core.datatype.Permission;
-import net.slqmy.tss_core.datatype.Rank;
-import net.slqmy.tss_core.datatype.player.PlayerProfile;
+import org.esoteric_organisation.tss_core_plugin.datatype.Permission;
+import org.esoteric_organisation.tss_core_plugin.datatype.Rank;
+import org.esoteric_organisation.tss_core_plugin.datatype.player.PlayerProfile;
 import net.slqmy.tss_ranks.TSSRanksPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

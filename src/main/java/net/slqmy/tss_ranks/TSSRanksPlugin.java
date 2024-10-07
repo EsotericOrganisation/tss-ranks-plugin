@@ -1,7 +1,7 @@
 package net.slqmy.tss_ranks;
 
-import net.slqmy.tss_core.TSSCorePlugin;
-import net.slqmy.tss_core.manager.FileManager;
+import org.esoteric_organisation.tss_core_plugin.TSSCorePlugin;
+import org.esoteric_organisation.tss_core_plugin.manager.FileManager;
 import net.slqmy.tss_ranks.command.SetRankCommand;
 import net.slqmy.tss_ranks.event.listener.ChatListener;
 import net.slqmy.tss_ranks.event.listener.ConnectionListener;
