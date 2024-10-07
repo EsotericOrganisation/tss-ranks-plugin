@@ -1,7 +1,7 @@
 name: tss-ranks-plugin
 version: '0.1'
 main: org.esoteric_organisation.tss_ranks_plugin.TSSRanksPlugin
-api-version: '1.20'
+api-version: '1.21'
 prefix: TSS-Ranks
 dependencies:
   server:
