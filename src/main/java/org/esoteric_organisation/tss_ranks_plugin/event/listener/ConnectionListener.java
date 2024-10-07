@@ -1,8 +1,8 @@
-package net.slqmy.tss_ranks.event.listener;
+package org.esoteric_organisation.tss_ranks_plugin.event.listener;
 
-import net.slqmy.tss_ranks.TSSRanksPlugin;
-import net.slqmy.tss_ranks.manager.NameTagManager;
-import net.slqmy.tss_ranks.manager.RankManager;
+import org.esoteric_organisation.tss_ranks_plugin.TSSRanksPlugin;
+import org.esoteric_organisation.tss_ranks_plugin.manager.NameTagManager;
+import org.esoteric_organisation.tss_ranks_plugin.manager.RankManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

@@ -1,4 +1,4 @@
-package net.slqmy.tss_ranks.command;
+package org.esoteric_organisation.tss_ranks_plugin.command;
 
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.CommandPermission;
@@ -11,8 +11,8 @@ import org.esoteric_organisation.tss_core_plugin.datatype.Rank;
 import org.esoteric_organisation.tss_core_plugin.datatype.player.Message;
 import org.esoteric_organisation.tss_core_plugin.manager.MessageManager;
 import org.esoteric_organisation.tss_core_plugin.util.DebugUtil;
-import net.slqmy.tss_ranks.TSSRanksPlugin;
-import net.slqmy.tss_ranks.manager.RankManager;
+import org.esoteric_organisation.tss_ranks_plugin.TSSRanksPlugin;
+import org.esoteric_organisation.tss_ranks_plugin.manager.RankManager;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

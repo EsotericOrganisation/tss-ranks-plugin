@@ -1,4 +1,4 @@
-rootProject.name = "tss_ranks"
+rootProject.name = "tss-ranks-plugin"
 
 plugins {
   id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"

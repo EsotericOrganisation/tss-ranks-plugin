@@ -1,12 +1,12 @@
-package net.slqmy.tss_ranks;
+package org.esoteric_organisation.tss_ranks_plugin;
 
 import org.esoteric_organisation.tss_core_plugin.TSSCorePlugin;
 import org.esoteric_organisation.tss_core_plugin.manager.FileManager;
-import net.slqmy.tss_ranks.command.SetRankCommand;
-import net.slqmy.tss_ranks.event.listener.ChatListener;
-import net.slqmy.tss_ranks.event.listener.ConnectionListener;
-import net.slqmy.tss_ranks.manager.NameTagManager;
-import net.slqmy.tss_ranks.manager.RankManager;
+import org.esoteric_organisation.tss_ranks_plugin.command.SetRankCommand;
+import org.esoteric_organisation.tss_ranks_plugin.event.listener.ChatListener;
+import org.esoteric_organisation.tss_ranks_plugin.event.listener.ConnectionListener;
+import org.esoteric_organisation.tss_ranks_plugin.manager.NameTagManager;
+import org.esoteric_organisation.tss_ranks_plugin.manager.RankManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;

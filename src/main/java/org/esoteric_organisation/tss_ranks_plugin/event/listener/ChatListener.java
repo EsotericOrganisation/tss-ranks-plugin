@@ -1,12 +1,12 @@
-package net.slqmy.tss_ranks.event.listener;
+package org.esoteric_organisation.tss_ranks_plugin.event.listener;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import org.esoteric_organisation.tss_core_plugin.datatype.Colour;
 import org.esoteric_organisation.tss_core_plugin.datatype.Rank;
-import net.slqmy.tss_ranks.TSSRanksPlugin;
-import net.slqmy.tss_ranks.manager.RankManager;
+import org.esoteric_organisation.tss_ranks_plugin.TSSRanksPlugin;
+import org.esoteric_organisation.tss_ranks_plugin.manager.RankManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

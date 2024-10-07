@@ -1,13 +1,15 @@
-name: TSS-Ranks
+name: tss-ranks-plugin
 version: '0.1'
-main: net.slqmy.tss_ranks.TSSRanksPlugin
+main: org.esoteric_organisation.tss_ranks_plugin.TSSRanksPlugin
 api-version: '1.20'
 prefix: TSS-Ranks
 dependencies:
   server:
-    TSS-Core:
+    tss-core-plugin:
       required: true
       load: BEFORE
 
-author: slqmy
+author: Esoteric Organisation
+contributors:
+  - Esoteric Enderman
 description: The plugin that manages ranks and permissions on The Slimy Swamp.
