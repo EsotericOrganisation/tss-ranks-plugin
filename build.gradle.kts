@@ -11,8 +11,14 @@ group = "org.esoteric_organisation"
 version = "0.1"
 description = "The Minecraft plugin that manages ranks and permissions on The Slimy Swamp Minecraft server."
 
+val javaVersion = 21
+val javaVersionEnumMember = JavaVersion.valueOf("VERSION_$javaVersion")
+
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    sourceCompatibility = javaVersionEnumMember
+    targetCompatibility = javaVersionEnumMember
+
+    toolchain.languageVersion.set(JavaLanguageVersion.of(javaVersion))
 }
 
 repositories {
@@ -28,8 +34,7 @@ dependencies {
 
 tasks {
     compileJava {
-        options.encoding = Charsets.UTF_8.name()
-        options.release.set(21)
+        options.release.set(javaVersion)
     }
 
     javadoc {
