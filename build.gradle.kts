@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "org.esoteric_organisation"
-version = "0.1"
+version = "0.1.1"
 description = "The Minecraft plugin that manages ranks and permissions on The Slimy Swamp Minecraft server."
 
 val projectNameString = rootProject.name
