@@ -9,7 +9,7 @@ plugins {
 
 group = "org.esoteric_organisation"
 version = "0.1"
-description = "The plugin that manages ranks and permissions on The Slimy Swamp."
+description = "The Minecraft plugin that manages ranks and permissions on The Slimy Swamp Minecraft server."
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
@@ -42,4 +42,5 @@ bukkitPluginYaml {
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.addAll("Esoteric Organisation", "Esoteric Enderman")
   apiVersion = "1.21"
+  description = "The Minecraft plugin that manages ranks and permissions on The Slimy Swamp Minecraft server."
 }
