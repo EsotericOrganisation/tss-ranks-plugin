@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.EsotericOrganisation:tss-core-plugin:0.2.1:dev-all")
+    compileOnly("com.github.EsotericOrganisation:tss-core-plugin:v2.0.1")
 
     paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
 }
