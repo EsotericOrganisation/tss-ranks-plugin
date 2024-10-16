@@ -1,9 +1,9 @@
-package org.esoteric_organisation.tss_ranks_plugin.manager;
+package org.esoteric.tss.minecraft.plugins.ranks.managers;
 
 import org.esoteric_organisation.tss_core_plugin.datatype.Permission;
 import org.esoteric_organisation.tss_core_plugin.datatype.Rank;
 import org.esoteric_organisation.tss_core_plugin.datatype.player.PlayerProfile;
-import org.esoteric_organisation.tss_ranks_plugin.TSSRanksPlugin;
+import org.esoteric.tss.minecraft.plugins.ranks.TSSRanksPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;

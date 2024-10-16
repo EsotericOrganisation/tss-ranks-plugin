@@ -1,8 +1,8 @@
-package org.esoteric_organisation.tss_ranks_plugin.event.listener;
+package org.esoteric.tss.minecraft.plugins.ranks.event.listeners;
 
-import org.esoteric_organisation.tss_ranks_plugin.TSSRanksPlugin;
-import org.esoteric_organisation.tss_ranks_plugin.manager.NameTagManager;
-import org.esoteric_organisation.tss_ranks_plugin.manager.RankManager;
+import org.esoteric.tss.minecraft.plugins.ranks.TSSRanksPlugin;
+import org.esoteric.tss.minecraft.plugins.ranks.managers.NameTagManager;
+import org.esoteric.tss.minecraft.plugins.ranks.managers.RankManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

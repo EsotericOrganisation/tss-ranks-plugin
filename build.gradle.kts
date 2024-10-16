@@ -8,8 +8,8 @@ plugins {
     id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1"
 }
 
-group = "org.esoteric_organisation"
-version = "0.1.1"
+group = "org.esoteric"
+version = "0.2.0"
 description = "The Minecraft plugin that manages ranks and permissions on The Slimy Swamp Minecraft server."
 
 val projectNameString = rootProject.name
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.EsotericOrganisation:tss-core-plugin:0.1.6:dev-all")
+    compileOnly("com.github.EsotericOrganisation:tss-core-plugin:0.2.1:dev-all")
 
     paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
 }
@@ -49,11 +49,15 @@ tasks {
 }
 
 bukkitPluginYaml {
-  main = "org.esoteric_organisation.tss_ranks_plugin.TSSRanksPlugin"
-  load = BukkitPluginYaml.PluginLoadOrder.STARTUP
+  name = "TSSRanks"
+  description = project.description
   authors.addAll("Esoteric Organisation", "Esoteric Enderman")
+
+  version = projectVersionString
   apiVersion = "1.21"
-  description = "The Minecraft plugin that manages ranks and permissions on The Slimy Swamp Minecraft server."
+  depend.addAll("TSSCore")
+  main = "org.esoteric.tss.minecraft.plugins.ranks.TSSRanksPlugin"
+  load = BukkitPluginYaml.PluginLoadOrder.STARTUP
 }
 
 publishing {

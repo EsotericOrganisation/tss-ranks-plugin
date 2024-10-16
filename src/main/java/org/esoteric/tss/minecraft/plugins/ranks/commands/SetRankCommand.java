@@ -1,4 +1,4 @@
-package org.esoteric_organisation.tss_ranks_plugin.command;
+package org.esoteric.tss.minecraft.plugins.ranks.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.CommandPermission;
@@ -11,8 +11,8 @@ import org.esoteric_organisation.tss_core_plugin.datatype.Rank;
 import org.esoteric_organisation.tss_core_plugin.datatype.player.Message;
 import org.esoteric_organisation.tss_core_plugin.manager.MessageManager;
 import org.esoteric_organisation.tss_core_plugin.util.DebugUtil;
-import org.esoteric_organisation.tss_ranks_plugin.TSSRanksPlugin;
-import org.esoteric_organisation.tss_ranks_plugin.manager.RankManager;
+import org.esoteric.tss.minecraft.plugins.ranks.TSSRanksPlugin;
+import org.esoteric.tss.minecraft.plugins.ranks.managers.RankManager;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

@@ -1,9 +1,9 @@
-package org.esoteric_organisation.tss_ranks_plugin.manager;
+package org.esoteric.tss.minecraft.plugins.ranks.managers;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import org.esoteric_organisation.tss_core_plugin.datatype.Rank;
-import org.esoteric_organisation.tss_ranks_plugin.TSSRanksPlugin;
+import org.esoteric.tss.minecraft.plugins.ranks.TSSRanksPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
