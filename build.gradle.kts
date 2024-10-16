@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "org.esoteric"
-version = "0.2.0"
+version = "0.2.1"
 description = "The Minecraft plugin that manages ranks and permissions on The Slimy Swamp Minecraft server."
 
 val projectNameString = rootProject.name
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.EsotericOrganisation:tss-core-plugin:v2.0.1:dev-all")
+    compileOnly("com.github.EsotericOrganisation:tss-core-plugin:v0.2.1:dev-all")
 
     paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
 }
