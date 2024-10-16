@@ -16,7 +16,7 @@ import java.io.File;
 
 public final class TSSRanksPlugin extends JavaPlugin {
 
-  private final TSSCorePlugin core = (TSSCorePlugin) Bukkit.getPluginManager().getPlugin("tss-core-plugin");
+  private final TSSCorePlugin core = (TSSCorePlugin) Bukkit.getPluginManager().getPlugin("TSSCore");
 
   private FileManager fileManager;
   private RankManager rankManager;
